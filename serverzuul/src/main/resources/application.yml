@@ -1,0 +1,46 @@
+#Component Info
+info:
+  component: Zuul-Server
+ 
+#Spring Application Name 
+spring:
+  application:
+    name: Zuul-Server
+ 
+#Server Port
+server:
+  port: 8766
+ 
+#Endpoints 
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+
+#Zuul routes active
+zuul:
+  routes:
+    public-restservice:
+        path: /public/**
+        serviceId: saludo.microservice
+    other-restservice:
+        path: /other/**
+        serviceId: demo.microservice
+
+
+eureka:
+  # Discovery Server Access
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instanceId: ${spring.application.name}:${server.port}
+
+#Ribbon Activation
+ribbon:
+  eureka:
+    enabled: true

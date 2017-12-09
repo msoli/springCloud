@@ -1,0 +1,39 @@
+### Spring properties
+# Service registers under this name
+spring:
+  application:
+    name: demo.microservice
+
+#Component Info
+info:
+ component: demo.microservice
+
+
+# HTTP Server (Tomcat) Port
+server:
+  port: 0
+
+# Discovery Server Access
+eureka:
+    instance:
+          instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+
+    client:
+      serviceUrl:
+        defaultZone: http://localhost:8761/eureka/
+
+
+# Disable Spring Boot's "Whitelabel" default error page, so we can use our own
+error:
+  whitelabel:
+    enabled: false
+
+#Service Registration Method
+cloud:
+ services:
+  registrationMethod: route
+
+  #Disable HTTP Basic Authentication
+security:
+ basic:
+  enabled: false
