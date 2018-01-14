@@ -13,6 +13,10 @@ server:
  
 #Endpoints 
 endpoints:
+  routes:
+    sensitive: false
+  trace:
+    sensitive: false
   restart:
     enabled: true
   shutdown:
@@ -23,6 +27,7 @@ endpoints:
 
 #Zuul routes active
 zuul:
+  ignoredServices: '*'
   routes:
     public-restservice:
         path: /public/**
