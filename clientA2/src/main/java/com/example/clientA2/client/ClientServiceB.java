@@ -19,7 +19,7 @@ public class ClientServiceB {
      * URL uses the logical name of user-service - upper or lower case,
      * doesn't matter.
      */
-    public static final String SERVICE_B_URL = "http://desktop-n99t78j:8766/other/";
+    public static final String SERVICE_B_URL = "http://DEMO.MICROSERVICE";
 
 
     @Autowired
@@ -41,12 +41,12 @@ public class ClientServiceB {
 
     //Synchronous Model
     @HystrixCommand(fallbackMethod = "saludoDefault")
-    public String getSaludo(String name) {
+    public String saludo(String name) {
 
         log.info("SALUDO () invoked: for " + name);
 
-        Object respuesta = restTemplate.getForObject(SERVICE_B_URL + "api/demo/{name}", Object.class);
-        return "respuesta";
+        String respuesta = restTemplate.getForObject(SERVICE_B_URL + "/api/demo/{name}", String.class, name);
+        return respuesta;
 
     }
 
@@ -55,7 +55,7 @@ public class ClientServiceB {
     public Future<String> getSaludoFuture(final String name) {
         return new AsyncResult<String>() {
             public String invoke() {
-                return restTemplate.getForObject(SERVICE_B_URL + "api/demo/{name}", String.class, name);
+                return restTemplate.getForObject(SERVICE_B_URL + "/api/demo/{name}", String.class, name);
             }
         };
     }

@@ -28,7 +28,7 @@ public class ExampleController {
     @GetMapping(path = "saludoDefault/{name}")
     public String saludoDefault(@PathVariable("name") String name) {
 
-        String response = clientServiceB.getSaludo(name);
+        String response = clientServiceB.saludo(name);
         return response;
 
     }
